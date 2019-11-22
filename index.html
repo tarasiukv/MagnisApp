@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>Comment Magnis</title>
+  <link rel="stylesheet" href="./styles.scss">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+</head>
+<body ng-app>
+
+    <header>
+      <h1 align="center" style="font-weight: lighter";>Comment</h1>
+    </header>
+
+    <div class="container">
+    <hr/>
+    <div class="form-group">
+        <h2 style="font-weight: lighter">Enter your things, dream or ...</h2>
+        <form ng-controller="Controller" class="ng-scope ng-valid ng-dirty">
+            <textarea class="form-control" ng-valid ng-dirty rows="5" ng-model="cmtName" placeholder="Ok?"></textarea>
+            <br/>
+            <button class="btn btn-success btn-md pull-right" ng-click="btn_post();">Comment</button>
+            <br/>
+            <hr/>
+            <h3>Comments</h3>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="cmt in comments"> {{ cmt }}
+                    <a href="" ng-click="post_cmt($home)"><span class="glyphicon glyphicon-trash" style="color:red; float:right;"></span></a>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+function Controller($scope) {
+     $scope.comments = [];
+     $scope.btn_post = function() {
+         if ($scope.cmtName != '') {
+             $scope.comments.push($scope.cmtName);
+             $scope.cmtName = "";
+         }
+     }
+     $scope.post_cmt = function($home) {
+         $scope.comments.splice($home, 1);
+     }
+ }
+</script>
+</body>
+</html>
